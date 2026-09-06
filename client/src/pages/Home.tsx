@@ -1,33 +1,16 @@
-import { useAuth } from "@/_core/hooks/useAuth";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { ArrowRight, Check, MessageSquare, Sparkles, Target, Zap } from "lucide-react";
+import { Link } from "wouter";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Workflow, Frontend Best Practices, Design Guide and Common Pitfalls
- */
+const points = ["Cenários que não entregam a resposta", "Feedback só depois da conversa", "Evolução baseada no seu histórico"];
+
 export default function Home() {
-  // The useAuth hook provides authentication state.
-  // To implement login/logout, call logout(), or start login from an event
-  // handler: onClick={() => startLogin()} (imported from "@/const"). Never call
-  // startLogin() during render (no href={startLogin()}) — it mints a one-time
-  // nonce cookie and must run only at the moment of navigation.
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
-
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
-    </div>
-  );
+  return <div className="min-h-screen overflow-hidden bg-[#14231f] text-[#f7fbf6]">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_77%_16%,rgba(91,190,133,0.18),transparent_31%),radial-gradient(circle_at_5%_90%,rgba(244,151,103,0.11),transparent_25%)]" />
+    <header className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-7 lg:px-12"><div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-[#dff7e6] text-[#14231f]"><Sparkles size={17} /></span><span className="font-display text-sm font-semibold tracking-tight">Sales Simulator</span></div><Link href="/dashboard" className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-[#d7e9dc] transition hover:bg-white/10">Entrar no workspace <ArrowRight className="ml-1 inline" size={13} /></Link></header>
+    <main className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 pb-24 pt-16 lg:grid-cols-[1.05fr_.95fr] lg:px-12 lg:pb-36 lg:pt-24">
+      <section className="animate-rise"><div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#416755] bg-[#1e3a2e] px-3 py-1.5 text-[11px] font-semibold text-[#a9dec0]"><span className="h-1.5 w-1.5 rounded-full bg-[#72d296]" /> Treinamento comercial com IA</div><h1 className="font-display max-w-2xl text-5xl font-semibold leading-[1.03] tracking-[-0.065em] sm:text-6xl lg:text-[76px]">Venda melhor.<br /><span className="text-[#8bd9a8]">Descubra antes.</span></h1><p className="mt-7 max-w-xl text-base leading-7 text-[#aec3b4]">Pratique conversas de vendas com clientes virtuais que têm contexto, objeções e necessidades escondidas — como na vida real.</p><div className="mt-9 flex flex-wrap gap-3"><Link href="/new-training" className="rounded-xl bg-[#dff7e6] px-5 py-3.5 text-sm font-bold text-[#14231f] shadow-[0_10px_30px_rgba(127,215,161,0.18)] transition hover:-translate-y-0.5">Começar treinamento <ArrowRight className="ml-2 inline" size={16} /></Link><Link href="/dashboard" className="rounded-xl border border-white/15 px-5 py-3.5 text-sm font-semibold text-[#d7e9dc] transition hover:bg-white/10">Ver meu progresso</Link></div></section>
+      <section className="relative animate-rise delay-1"><div className="absolute -inset-8 rounded-[40px] bg-[#8bd9a8]/10 blur-3xl" /><div className="relative rounded-[28px] border border-white/12 bg-[#203b2f] p-5 shadow-2xl sm:p-7"><div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4"><div className="flex items-center gap-2 text-xs font-semibold text-[#d7e9dc]"><MessageSquare size={15} className="text-[#8bd9a8]" /> Simulação em andamento</div><span className="rounded-full bg-[#335441] px-2.5 py-1 text-[10px] font-semibold text-[#a9dec0]">AO VIVO</span></div><div className="space-y-5"><div className="flex gap-3"><div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#f4c2a1] text-[10px] font-bold text-[#7c3f25]">CM</div><div className="rounded-2xl rounded-tl-sm bg-[#2d4b3b] px-4 py-3 text-sm leading-6 text-[#e4f2e7]">Quero um site mais moderno. O atual já não representa bem a empresa.</div></div><div className="flex justify-end gap-3"><div className="max-w-[80%] rounded-2xl rounded-tr-sm bg-[#dff7e6] px-4 py-3 text-sm leading-6 text-[#1b4c34]">Entendi. O que você gostaria que mudasse na percepção de quem chega até vocês?</div><div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#91dcb0] text-[10px] font-bold text-[#1d5639]">VC</div></div><div className="flex gap-3"><div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#f4c2a1] text-[10px] font-bold text-[#7c3f25]">CM</div><div className="rounded-2xl rounded-tl-sm bg-[#2d4b3b] px-4 py-3 text-sm leading-6 text-[#e4f2e7]">Na verdade, o problema é que o marketing traz visitas, mas quase ninguém pede uma demonstração.</div></div></div><div className="mt-7 flex items-center gap-3 border-t border-white/10 pt-5"><div className="h-2 flex-1 rounded-full bg-[#385745]"><div className="h-2 w-[68%] rounded-full bg-[#8bd9a8]" /></div><span className="text-[11px] font-semibold text-[#a9dec0]">68% descoberto</span></div></div></section>
+    </main>
+    <section className="relative border-t border-white/10 bg-[#f6f7f4] px-6 py-14 text-[#14231f] lg:px-12"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#1d6b4b]">O método</p><h2 className="font-display text-3xl font-semibold tracking-[-0.04em]">Não é decorar pitch.<br />É aprender a ouvir.</h2></div><div className="grid gap-3 sm:grid-cols-3">{points.map((point, index) => <div key={point} className="rounded-2xl border border-[#e0e7e0] bg-white p-4"><div className="mb-5 grid h-8 w-8 place-items-center rounded-lg bg-[#e8f5e9] text-[#1d6b4b]">{index === 0 ? <Target size={15} /> : index === 1 ? <Zap size={15} /> : <Check size={15} />}</div><p className="text-sm font-semibold leading-5">{point}</p></div>)}</div></div></section>
+  </div>;
 }
