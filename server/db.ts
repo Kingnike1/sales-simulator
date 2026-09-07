@@ -19,7 +19,20 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      const url = new URL(process.env.DATABASE_URL);
+
+      _db = drizzle({
+        connection: {
+          host: url.hostname,
+          port: Number(url.port || 3306),
+          user: decodeURIComponent(url.username),
+          password: decodeURIComponent(url.password),
+          database: decodeURIComponent(url.pathname.slice(1)),
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
+      });
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -29,8 +42,12 @@ export async function getDb() {
 }
 
 function insertedId(result: unknown) {
-  const candidate = result as { insertId?: number | bigint };
-  return Number(candidate?.insertId ?? 0);
+  const candidate = result as
+    | { insertId?: number | bigint }
+    | [{ insertId?: number | bigint }, unknown];
+
+  const header = Array.isArray(candidate) ? candidate[0] : candidate;
+  return Number(header?.insertId ?? 0);
 }
 
 export async function upsertUser(user: InsertUser): Promise<void> {
@@ -66,7 +83,9 @@ export async function createScenario(data: InsertScenario) {
   if (!db) throw new Error("Database is not configured");
   const result = await db.insert(scenarios).values(data);
   const id = insertedId(result);
+
   const created = await db.select().from(scenarios).where(eq(scenarios.id, id)).limit(1);
+
   return created[0];
 }
 

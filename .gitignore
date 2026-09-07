@@ -61,3 +61,6 @@ coverage/
 # Local WebDev metadata
 .webdev/
 .project-config.json
+next-env.d.ts
+
+.next/
