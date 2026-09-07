@@ -14,8 +14,6 @@ import {
   users,
   InsertUser,
 } from "../drizzle/schema";
-import { ENV } from "./_core/env";
-
 let _db: ReturnType<typeof drizzle> | null = null;
 
 export async function getDb() {
@@ -52,9 +50,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   if (user.role) {
     values.role = user.role;
     updateSet.role = user.role;
-  } else if (user.openId === ENV.ownerOpenId) {
-    values.role = "admin";
-    updateSet.role = "admin";
   }
   await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
 }

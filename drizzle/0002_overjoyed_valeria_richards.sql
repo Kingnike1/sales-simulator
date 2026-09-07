@@ -1,0 +1,1 @@
+ALTER TABLE `users` DROP INDEX `users_openId_unique`;

@@ -212,8 +212,9 @@ const normalizeToolChoice = (
   return toolChoice;
 };
 
-const resolveApiUrl = () =>
-  `${ENV.openaiBaseUrl.replace(/\/$/, "")}/chat/completions`;
+const OPENAI_API_BASE_URL = "https://api.openai.com/v1";
+
+const resolveApiUrl = () => `${OPENAI_API_BASE_URL}/chat/completions`;
 
 const assertApiKey = () => {
   if (!ENV.openaiApiKey) {
@@ -431,7 +432,7 @@ export type ModelsResponse = {
 export async function listLLMModels(): Promise<ModelsResponse> {
   assertApiKey();
 
-  const url = `${ENV.openaiBaseUrl.replace(/\/$/, "")}/models`;
+  const url = `${OPENAI_API_BASE_URL}/models`;
 
   const response = await fetchWithBackoff(url, {
     headers: { authorization: `Bearer ${ENV.openaiApiKey}` },
